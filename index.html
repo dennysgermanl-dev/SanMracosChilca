@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#590000">
+  <meta name="description" content="Portal institucional de la Universidad Nacional Mayor de San Marcos - Filial Chilca.">
+  <title>UNMSM | Filial Chilca</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: { sanmarcos: { red: '#730000', dark: '#430000', gold: '#D4AF37', cream: '#FBF7EF' } },
+          boxShadow: {
+            soft: '0 18px 55px rgba(30, 20, 20, .09)',
+            glow: '0 15px 45px rgba(115, 0, 0, .24)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root { color-scheme: light; }
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+    .glass-nav { background: rgba(255,255,255,.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(115,0,0,.08); }
+    .hero-bg { transform: scale(1.04); animation: heroDrift 24s ease-in-out infinite alternate; }
+    @keyframes heroDrift { from { transform: scale(1.04) translate3d(0,0,0); } to { transform: scale(1.12) translate3d(-1%,1%,0); } }
+    .hero-grid { background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px); background-size: 58px 58px; mask-image: linear-gradient(to bottom, black, transparent 88%); }
+    .eyebrow { letter-spacing: .22em; }
+    .section-kicker::before, .section-kicker::after { content: ''; display: inline-block; width: 26px; height: 1px; background: #D4AF37; vertical-align: middle; margin: 0 11px; }
+    .career-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+    .career-card:hover { transform: translateY(-8px); box-shadow: 0 24px 55px rgba(35,20,20,.11); }
+    .mobile-panel { transition: opacity .25s ease, transform .25s ease, visibility .25s ease; }
+   .mobile-panel[hidden] {
+    display: none !important;
+}
+
+.mobile-panel:not([hidden]) {
+    display: block;
+    animation: menuAppear .25s ease forwards;
+}
+
+@keyframes menuAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="bg-[#faf9f7] text-slate-800 antialiased selection:bg-sanmarcos-red selection:text-white">
+
+  <!-- Navegación principal -->
+  <nav id="navbar" class="glass-nav fixed inset-x-0 top-0 z-50 transition-shadow duration-300">
+    <div class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[88px] lg:px-8">
+      <a href="index.html" class="group flex min-w-0 items-center gap-3" aria-label="UNMSM Filial Chilca, inicio">
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold text-white shadow-glow transition-transform group-hover:rotate-3 group-hover:scale-105 sm:h-12 sm:w-12">SM</span>
+        <span class="min-w-0">
+          <span class="block text-lg font-extrabold leading-tight tracking-tight text-slate-900 sm:text-xl">UNMSM</span>
+          <span class="mt-0.5 block text-[9px] font-extrabold uppercase tracking-[.2em] text-sanmarcos-red sm:text-[10px]">Filial Chilca</span>
+        </span>
+      </a>
+
+      <div class="hidden items-center gap-1 md:flex">
+        <a href="index.html" aria-current="page" class="rounded-full bg-red-50 px-5 py-2.5 text-sm font-extrabold text-sanmarcos-red">Inicio</a>
+        <a href="noticias.html" class="rounded-full px-5 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Noticias</a>
+        <a href="proyectos.html" class="rounded-full px-5 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Proyectos</a>
+        <a href="docentes.html" class="rounded-full px-5 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Directorio</a>
+      </div>
+
+      <button id="menuToggle" type="button" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-red-200 hover:text-sanmarcos-red md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <i data-lucide="menu" class="h-5 w-5"></i>
+      </button>
+    </div>
+
+    <!-- Menú móvil: se despliega debajo de la barra -->
+    <div id="mobileMenu" class="mobile-panel absolute inset-x-0 top-full border-t border-slate-100 bg-white/95 px-4 pb-5 pt-3 shadow-xl md:hidden" hidden>
+      <div class="mx-auto flex max-w-7xl flex-col gap-1">
+        <a href="index.html" class="rounded-xl bg-red-50 px-4 py-3 text-sm font-extrabold text-sanmarcos-red">Inicio</a>
+        <a href="noticias.html" class="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-sanmarcos-red">Noticias</a>
+        <a href="proyectos.html" class="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-sanmarcos-red">Proyectos</a>
+        <a href="docentes.html" class="rounded-xl px-4 py-3 text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-sanmarcos-red">Directorio docente</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero institucional -->
+    <section class="relative flex min-h-[720px] items-center overflow-hidden bg-[#210909] pt-24 sm:min-h-[760px] lg:min-h-[820px]" aria-label="Presentación institucional">
+      <div id="heroBackground" class="hero-bg absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=85&w=2200&auto=format&fit=crop');"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(105deg,rgba(23,5,5,.94)_0%,rgba(55,0,0,.78)_48%,rgba(20,8,8,.43)_100%)]"></div>
+      <div class="hero-grid absolute inset-0 opacity-50"></div>
+      <div class="absolute -right-28 top-28 h-72 w-72 rounded-full border border-white/10 sm:h-[480px] sm:w-[480px]"></div>
+      <div class="absolute -right-12 top-44 h-52 w-52 rounded-full border border-white/10 sm:h-[340px] sm:w-[340px]"></div>
+
+      <div class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.2fr_.8fr] lg:px-8 lg:py-28">
+        <div class="max-w-3xl text-center lg:text-left">
+          <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[9px] font-extrabold uppercase tracking-[.19em] text-[#f1d98c] shadow-lg backdrop-blur-md sm:text-[10px]">
+            <span class="h-1.5 w-1.5 rounded-full bg-sanmarcos-gold shadow-[0_0_12px_#D4AF37]"></span>
+            Universidad Nacional Mayor de San Marcos
+          </div>
+          <h1 class="text-4xl font-extrabold leading-[1.12] tracking-tight text-white drop-shadow-xl sm:text-5xl md:text-6xl lg:text-[4.4rem]">
+            El conocimiento
+            <span class="mt-1 block bg-gradient-to-r from-[#f5df9d] via-sanmarcos-gold to-[#fff1c5] bg-clip-text text-transparent">transforma nuestro futuro.</span>
+          </h1>
+          <p class="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/80 sm:text-base sm:leading-8 lg:mx-0 lg:text-lg">
+            Excelencia académica, investigación y formación profesional al servicio del desarrollo del Sur Chico.
+          </p>
+          <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+            <a href="#escuelas" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-sanmarcos-gold px-7 py-3 text-sm font-extrabold text-[#2d1600] shadow-[0_12px_35px_rgba(212,175,55,.25)] transition hover:-translate-y-1 hover:bg-[#e5c65f]">
+              Conoce nuestras escuelas <i data-lucide="arrow-down-right" class="h-4 w-4"></i>
+            </a>
+            <a href="proyectos.html" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/35 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:-translate-y-1 hover:bg-white/20">
+              Explorar proyectos <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </div>
+          <div class="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-xs font-semibold text-white/65 lg:justify-start">
+            <span class="inline-flex items-center gap-2"><i data-lucide="book-open" class="h-4 w-4 text-sanmarcos-gold"></i> Formación profesional</span>
+            <span class="inline-flex items-center gap-2"><i data-lucide="microscope" class="h-4 w-4 text-sanmarcos-gold"></i> Investigación</span>
+            <span class="inline-flex items-center gap-2"><i data-lucide="users" class="h-4 w-4 text-sanmarcos-gold"></i> Comunidad universitaria</span>
+          </div>
+        </div>
+
+        <div class="mx-auto hidden w-full max-w-sm lg:block">
+          <div class="relative rounded-[2rem] border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-xl">
+            <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-white/15 to-white/[.03] p-8 text-white">
+              <div class="mb-10 flex items-center justify-between">
+                <span class="text-[10px] font-extrabold uppercase tracking-[.2em] text-white/70">Decana de América</span>
+                <i data-lucide="award" class="h-6 w-6 text-sanmarcos-gold"></i>
+              </div>
+              <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-sanmarcos-gold text-2xl font-extrabold text-sanmarcos-dark shadow-lg">SM</div>
+              <p class="text-3xl font-extrabold leading-tight">Tradición que inspira.</p>
+              <p class="mt-2 text-3xl font-extrabold leading-tight text-[#e9cf7e]">Futuro que construye.</p>
+              <div class="mt-9 h-px bg-white/20"></div>
+              <p class="mt-5 text-xs leading-6 text-white/70">Una comunidad que impulsa el talento, el pensamiento crítico y el compromiso con la sociedad.</p>
+            </div>
+            <div class="absolute -bottom-5 -left-6 hidden items-center gap-3 rounded-2xl bg-white px-4 py-3 text-slate-800 shadow-xl xl:flex">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-red-50 text-sanmarcos-red"><i data-lucide="graduation-cap" class="h-5 w-5"></i></span>
+              <span><b class="block text-xs">UNMSM</b><small class="text-[10px] text-slate-500">Filial Chilca</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#identidad" class="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[9px] font-bold uppercase tracking-[.22em] text-white/60 transition hover:text-white sm:flex">
+        Descubre más <i data-lucide="chevron-down" class="h-4 w-4 animate-bounce"></i>
+      </a>
+    </section>
+
+    <!-- Identidad institucional dinámica: portal.js conserva este ID -->
+    <section id="identidad" class="relative z-20 -mt-8 rounded-t-[2rem] bg-white py-16 shadow-[0_-18px_55px_rgba(0,0,0,.08)] sm:-mt-12 sm:rounded-t-[3rem] sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-8">
+        <div class="mb-10 flex flex-col gap-3 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="section-kicker text-center text-[10px] font-extrabold uppercase tracking-[.2em] text-sanmarcos-red sm:text-left">Nuestra esencia</p>
+            <h2 class="mt-3 text-center text-3xl font-extrabold tracking-tight text-slate-900 sm:text-left sm:text-4xl">Identidad universitaria</h2>
+          </div>
+          <p class="max-w-md text-center text-sm leading-7 text-slate-500 sm:text-right">Conoce los principios y propósitos que orientan nuestra comunidad académica.</p>
+        </div>
+        <div id="identidadGrid" class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">
+          <div class="animate-pulse rounded-3xl border border-slate-100 bg-slate-50 p-8 sm:p-10"><div class="mb-6 h-12 w-12 rounded-2xl bg-slate-200"></div><div class="mb-4 h-6 w-1/3 rounded bg-slate-200"></div><div class="mb-2 h-4 w-full rounded bg-slate-200"></div><div class="h-4 w-5/6 rounded bg-slate-200"></div></div>
+          <div class="animate-pulse rounded-3xl border border-slate-100 bg-slate-50 p-8 sm:p-10"><div class="mb-6 h-12 w-12 rounded-2xl bg-slate-200"></div><div class="mb-4 h-6 w-1/3 rounded bg-slate-200"></div><div class="mb-2 h-4 w-full rounded bg-slate-200"></div><div class="h-4 w-5/6 rounded bg-slate-200"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oferta académica: contenido original conservado -->
+    <section id="escuelas" class="relative overflow-hidden bg-[#f7f5f2] py-20 sm:py-28">
+      <div class="absolute -left-32 top-20 h-72 w-72 rounded-full bg-red-100/60 blur-3xl"></div>
+      <div class="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-amber-100/60 blur-3xl"></div>
+      <div class="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-8">
+        <div class="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <p class="section-kicker text-[10px] font-extrabold uppercase tracking-[.2em] text-sanmarcos-red">Oferta académica</p>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">Nuestras Escuelas Profesionales</h2>
+          <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base">Áreas de formación orientadas al conocimiento, la innovación y la solución de desafíos reales.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <article class="career-card group rounded-3xl border border-slate-200/80 bg-white p-7 shadow-sm sm:p-8">
+            <div class="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-sanmarcos-red transition duration-300 group-hover:bg-sanmarcos-red group-hover:text-white"><i data-lucide="chart-no-axes-combined" class="h-6 w-6"></i></div>
+            <h3 class="text-lg font-extrabold leading-snug text-slate-900">Investigación Operativa</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-500">Modelado matemático y optimización de recursos.</p>
+            <div class="mt-7 h-1 w-10 rounded-full bg-sanmarcos-gold transition-all duration-300 group-hover:w-16"></div>
+          </article>
+          <article class="career-card group rounded-3xl border border-slate-200/80 bg-white p-7 shadow-sm sm:p-8">
+            <div class="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 transition duration-300 group-hover:bg-blue-700 group-hover:text-white"><i data-lucide="zap" class="h-6 w-6"></i></div>
+            <h3 class="text-lg font-extrabold leading-snug text-slate-900">Ingeniería Eléctrica</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-500">Sistemas de energía, automatización e instalaciones.</p>
+            <div class="mt-7 h-1 w-10 rounded-full bg-sanmarcos-gold transition-all duration-300 group-hover:w-16"></div>
+          </article>
+          <article class="career-card group rounded-3xl border border-slate-200/80 bg-white p-7 shadow-sm sm:p-8">
+            <div class="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-700 transition duration-300 group-hover:bg-indigo-700 group-hover:text-white"><i data-lucide="briefcase-business" class="h-6 w-6"></i></div>
+            <h3 class="text-lg font-extrabold leading-snug text-slate-900">Administración</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-500">Gestión estratégica de organizaciones modernas.</p>
+            <div class="mt-7 h-1 w-10 rounded-full bg-sanmarcos-gold transition-all duration-300 group-hover:w-16"></div>
+          </article>
+          <article class="career-card group rounded-3xl border border-slate-200/80 bg-white p-7 shadow-sm sm:p-8">
+            <div class="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-700 transition duration-300 group-hover:bg-orange-600 group-hover:text-white"><i data-lucide="settings" class="h-6 w-6"></i></div>
+            <h3 class="text-lg font-extrabold leading-snug text-slate-900">Ingeniería Industrial</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-500">Optimización de procesos de producción y servicios.</p>
+            <div class="mt-7 h-1 w-10 rounded-full bg-sanmarcos-gold transition-all duration-300 group-hover:w-16"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página: IDs utilizados por portal.js conservados -->
+  <footer class="bg-[#1d1717] pt-16 text-white sm:pt-20">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-8">
+      <div class="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.5fr_.8fr_1fr] lg:gap-16">
+        <div>
+          <a href="index.html" class="mb-6 inline-flex items-center gap-3">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold shadow-lg">SM</span>
+            <span class="text-xl font-extrabold tracking-tight">UNMSM Chilca</span>
+          </a>
+          <p class="max-w-md text-sm leading-7 text-white/55">Universidad Nacional Mayor de San Marcos, Decana de América. Formando el futuro del Perú desde la sede sur.</p>
+         
+<div class="flex gap-3">
+    <!-- Facebook -->
+    <a href="#" id="linkFb"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Facebook"
+       class="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-all hover:bg-blue-600 hover:scale-105">
+
+        <svg viewBox="0 0 24 24"
+             class="h-6 w-6"
+             fill="currentColor"
+             aria-hidden="true">
+            <path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8h3.4z"/>
+        </svg>
+    </a>
+
+    <!-- Instagram -->
+    <a href="#" id="linkIg"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Instagram"
+       class="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-all hover:bg-pink-600 hover:scale-105">
+
+        <svg viewBox="0 0 24 24"
+             class="h-6 w-6"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r=".8"
+                    fill="currentColor" stroke="none"/>
+        </svg>
+    </a>
+</div>
+
+        </div>
+
+        <div>
+          <h3 class="mb-6 text-xs font-extrabold uppercase tracking-[.2em] text-[#e5cb79]">Navegación</h3>
+          <ul class="space-y-4 text-sm text-white/60">
+            <li><a href="index.html" class="transition hover:text-white">Inicio</a></li>
+            <li><a href="noticias.html" class="transition hover:text-white">Noticias</a></li>
+            <li><a href="proyectos.html" class="transition hover:text-white">Proyectos</a></li>
+            <li><a href="docentes.html" class="transition hover:text-white">Directorio docente</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="mb-6 text-xs font-extrabold uppercase tracking-[.2em] text-[#e5cb79]">Contacto</h3>
+          <ul class="space-y-5 text-sm text-white/60">
+            <li class="flex items-start gap-3"><i data-lucide="map-pin" class="mt-0.5 h-5 w-5 shrink-0 text-sanmarcos-gold"></i><span>Filial Chilca, Lima, Perú.</span></li>
+            <li class="flex items-center gap-3"><i data-lucide="phone" class="h-5 w-5 shrink-0 text-sanmarcos-gold"></i><span id="txtTelefono">Cargando...</span></li>
+            <li class="flex items-center gap-3"><i data-lucide="mail" class="h-5 w-5 shrink-0 text-sanmarcos-gold"></i><span id="txtCorreo" class="break-all">Cargando...</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center justify-between gap-4 py-7 text-center sm:flex-row sm:text-left">
+        <p class="text-xs font-medium text-white/40">© 2026 UNMSM Filial Chilca. Todos los derechos reservados.</p>
+        <p class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/50">Hecho con <i data-lucide="heart" class="mx-1.5 h-3.5 w-3.5 fill-current text-red-400"></i> por un SanMarquino :)</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Se mantiene el JS externo y su orden de carga -->
+  <script>
+   (() => {
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+    const navbar = document.getElementById('navbar');
+
+    if (toggle && menu) {
+
+        const openMenu = () => {
+            menu.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.setAttribute('aria-label', 'Cerrar menú');
+            toggle.innerHTML = '<i data-lucide="x" class="h-5 w-5"></i>';
+
+            if (window.lucide) lucide.createIcons();
+        };
+
+        const closeMenu = () => {
+            menu.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Abrir menú');
+            toggle.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+
+            if (window.lucide) lucide.createIcons();
+        };
+
+        toggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (
+                !menu.hidden &&
+                !menu.contains(event.target) &&
+                !toggle.contains(event.target)
+            ) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) closeMenu();
+        });
+    }
+
+    if (navbar) {
+        const updateNav = () => {
+            navbar.classList.toggle('shadow-lg', window.scrollY > 12);
+        };
+
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+    }
+})();
+  </script>
+  <script type="module" src="portal.js"></script>
+</body>
+</html>

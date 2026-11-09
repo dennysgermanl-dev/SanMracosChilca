@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4A0000">
+    <title>Proyectos | UNMSM Filial Chilca</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        sanmarcos: {
+                            red: '#730000',
+                            dark: '#4A0000',
+                            gold: '#D4AF37',
+                            light: '#F8F1E8'
+                        }
+                    },
+                    boxShadow: {
+                        glow: '0 20px 70px rgba(115, 0, 0, .22)'
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        :root { color-scheme: dark; }
+        * { -webkit-tap-highlight-color: transparent; }
+        body { overflow-x: hidden; }
+        .glass-dark {
+            background: rgba(18, 20, 27, .82);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: linear-gradient(to bottom, black, transparent 92%);
+        }
+        .hero-orb { filter: blur(90px); pointer-events: none; }
+        .gold-text {
+            background: linear-gradient(100deg, #D4AF37 5%, #FFF0B0 48%, #D4AF37 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,.35), transparent);
+        }
+        #proyectosGrid { min-height: 280px; }
+        #proyectosGrid > * { min-width: 0; }
+        #proyectosGrid img { max-width: 100%; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#101116] text-gray-100 antialiased selection:bg-sanmarcos-gold selection:text-gray-950">
+
+    <!-- Navegación -->
+    <nav class="fixed inset-x-0 top-0 z-50 glass-dark transition-all duration-300" id="navbar">
+        <div class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <a href="index.html" class="group flex items-center gap-3" aria-label="UNMSM Filial Chilca, ir al inicio">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold text-white shadow-lg shadow-red-950/30 transition duration-300 group-hover:-rotate-3 group-hover:scale-105">
+                    SM
+                </div>
+                <div>
+                    <p class="text-base font-extrabold leading-none tracking-tight text-white sm:text-lg">UNMSM</p>
+                    <p class="mt-1 text-[9px] font-bold uppercase tracking-[.24em] text-sanmarcos-gold sm:text-[10px]">Filial Chilca</p>
+                </div>
+            </a>
+
+            <div class="hidden items-center gap-8 md:flex">
+                <a href="index.html" class="text-sm font-semibold text-gray-400 transition hover:text-white">Inicio</a>
+                <a href="noticias.html" class="text-sm font-semibold text-gray-400 transition hover:text-white">Noticias</a>
+                <a href="proyectos.html" aria-current="page" class="relative py-2 text-sm font-bold text-sanmarcos-gold">
+                    Proyectos
+                    <span class="absolute -bottom-[19px] left-0 h-[2px] w-full rounded-full bg-sanmarcos-gold"></span>
+                </a>
+                <a href="docentes.html" class="text-sm font-semibold text-gray-400 transition hover:text-white">Directorio</a>
+               
+            </div>
+
+            <button id="menuToggle" type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:bg-white/10 md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden border-t border-white/10 bg-[#15161d]/95 px-4 py-4 shadow-2xl backdrop-blur-xl md:hidden">
+            <div class="mx-auto flex max-w-7xl flex-col gap-1">
+                <a href="index.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white">Inicio</a>
+                <a href="noticias.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white">Noticias</a>
+                <a href="proyectos.html" aria-current="page" class="rounded-xl bg-sanmarcos-gold/10 px-4 py-3 text-sm font-bold text-sanmarcos-gold">Proyectos</a>
+                <a href="docentes.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-300 transition hover:bg-white/5 hover:text-white">Directorio</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Cabecera principal -->
+        <section class="relative isolate overflow-hidden pb-20 pt-36 sm:pb-24 sm:pt-44 lg:pb-28">
+            <div class="hero-grid absolute inset-0 -z-10 opacity-70"></div>
+            <div class="hero-orb absolute -left-40 top-10 -z-10 h-80 w-80 rounded-full bg-sanmarcos-red/35 sm:h-[28rem] sm:w-[28rem]"></div>
+            <div class="hero-orb absolute -right-40 top-20 -z-10 h-80 w-80 rounded-full bg-sanmarcos-gold/20 sm:h-[28rem] sm:w-[28rem]"></div>
+            <div class="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-[#101116] to-transparent"></div>
+
+            <div class="mx-auto max-w-5xl px-4 text-center sm:px-6">
+                <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-sanmarcos-gold/25 bg-white/[.045] px-4 py-2 shadow-lg shadow-black/10 backdrop-blur">
+                    <span class="flex h-2 w-2 rounded-full bg-sanmarcos-gold shadow-[0_0_12px_rgba(212,175,55,.8)]"></span>
+                    <span class="text-[10px] font-extrabold uppercase tracking-[.2em] text-sanmarcos-gold sm:text-xs">Investigación · Creatividad · Desarrollo</span>
+                </div>
+
+                <p class="mb-4 text-xs font-bold uppercase tracking-[.32em] text-gray-500 sm:text-sm">UNMSM · Filial Chilca</p>
+                <h1 class="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                    Ideas que construyen
+                    <span class="gold-text block">el futuro.</span>
+                </h1>
+                <p class="mx-auto mt-7 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base sm:leading-8 md:text-lg">
+                    Conoce los proyectos académicos y trabajos de investigación desarrollados por nuestra comunidad universitaria. Talento, conocimiento e innovación al servicio de la sociedad.
+                </p>
+
+                <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                    <a href="#proyectos" class="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-sanmarcos-gold px-7 py-3 text-sm font-extrabold text-gray-950 shadow-lg shadow-yellow-900/20 transition hover:-translate-y-1 hover:bg-yellow-300 sm:w-auto">
+                        Explorar proyectos
+                        <i data-lucide="arrow-down" class="h-4 w-4 transition group-hover:translate-y-1"></i>
+                    </a>
+                    <a href="index.html" class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[.04] px-7 py-3 text-sm font-bold text-gray-200 transition hover:border-white/30 hover:bg-white/[.08] sm:w-auto">
+                        <i data-lucide="arrow-left" class="h-4 w-4"></i>
+                        Volver al inicio
+                    </a>
+                </div>
+
+                <div class="mx-auto mt-14 flex max-w-xl items-center justify-center gap-5 text-left sm:gap-10">
+                    <div>
+                        <p class="text-[10px] font-bold uppercase tracking-[.2em] text-gray-500">Enfoque</p>
+                        <p class="mt-1 text-sm font-bold text-gray-200 sm:text-base">Conocimiento aplicado</p>
+                    </div>
+                    <div class="h-10 w-px bg-white/10"></div>
+                    <div>
+                        <p class="text-[10px] font-bold uppercase tracking-[.2em] text-gray-500">Comunidad</p>
+                        <p class="mt-1 text-sm font-bold text-gray-200 sm:text-base">Talento universitario</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider mx-auto max-w-6xl"></div>
+
+        <!-- Listado dinámico: el ID es utilizado por portal.js -->
+        <section id="proyectos" class="relative pb-24 pt-16 sm:pb-32 sm:pt-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 flex flex-col gap-5 sm:mb-12 md:flex-row md:items-end md:justify-between">
+                    <div class="max-w-2xl">
+                        <p class="mb-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.24em] text-sanmarcos-gold">
+                            <span class="h-px w-7 bg-sanmarcos-gold"></span>
+                            Vitrina académica
+                        </p>
+                        <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Proyectos destacados</h2>
+                        <p class="mt-3 max-w-xl text-sm leading-7 text-gray-400 sm:text-base">
+                            Explora las iniciativas, investigaciones y propuestas que reflejan el esfuerzo y la capacidad de nuestra comunidad.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 self-start rounded-full border border-white/10 bg-white/[.04] px-4 py-2.5 md:self-auto">
+                        <i data-lucide="layers" class="h-4 w-4 text-sanmarcos-gold"></i>
+                        <span class="text-xs font-semibold text-gray-300">Repositorio de proyectos</span>
+                    </div>
+                </div>
+
+                <div id="proyectosGrid" class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
+                    <!-- Skeletons de carga -->
+                    <div class="overflow-hidden rounded-3xl border border-white/10 bg-[#191a21] animate-pulse">
+                        <div class="h-52 bg-white/[.06]"></div>
+                        <div class="space-y-4 p-6">
+                            <div class="h-3 w-24 rounded bg-white/10"></div>
+                            <div class="h-6 w-3/4 rounded bg-white/10"></div>
+                            <div class="h-3 w-full rounded bg-white/[.07]"></div>
+                            <div class="h-3 w-5/6 rounded bg-white/[.07]"></div>
+                            <div class="h-10 w-36 rounded-full bg-white/10"></div>
+                        </div>
+                    </div>
+                    <div class="hidden overflow-hidden rounded-3xl border border-white/10 bg-[#191a21] animate-pulse sm:block">
+                        <div class="h-52 bg-white/[.06]"></div>
+                        <div class="space-y-4 p-6">
+                            <div class="h-3 w-24 rounded bg-white/10"></div>
+                            <div class="h-6 w-3/4 rounded bg-white/10"></div>
+                            <div class="h-3 w-full rounded bg-white/[.07]"></div>
+                            <div class="h-3 w-5/6 rounded bg-white/[.07]"></div>
+                            <div class="h-10 w-36 rounded-full bg-white/10"></div>
+                        </div>
+                    </div>
+                    <div class="hidden overflow-hidden rounded-3xl border border-white/10 bg-[#191a21] animate-pulse xl:block">
+                        <div class="h-52 bg-white/[.06]"></div>
+                        <div class="space-y-4 p-6">
+                            <div class="h-3 w-24 rounded bg-white/10"></div>
+                            <div class="h-6 w-3/4 rounded bg-white/10"></div>
+                            <div class="h-3 w-full rounded bg-white/[.07]"></div>
+                            <div class="h-3 w-5/6 rounded bg-white/[.07]"></div>
+                            <div class="h-10 w-36 rounded-full bg-white/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex flex-col items-center justify-center gap-3 text-center">
+                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-sanmarcos-gold/60 to-transparent"></div>
+                    <p class="text-xs font-medium text-gray-500">El conocimiento crece cuando se comparte.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer institucional -->
+    <footer class="border-t border-gray-200 bg-white pb-8 pt-16 text-gray-800 sm:pt-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+                <div class="sm:col-span-2">
+                    <a href="index.html" class="mb-5 inline-flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold text-white shadow-lg">SM</div>
+                        <div>
+                            <h2 class="text-lg font-extrabold leading-none text-gray-900">UNMSM Chilca</h2>
+                            <p class="mt-1 text-[9px] font-bold uppercase tracking-[.2em] text-sanmarcos-red">Decana de América</p>
+                        </div>
+                    </a>
+                    <p class="mb-6 max-w-sm text-sm leading-7 text-gray-500">
+                        Universidad Nacional Mayor de San Marcos, Decana de América. Formando el futuro del Perú desde la sede sur.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" id="linkFb" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-gray-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-600">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" id="linkIg" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-gray-600 transition hover:border-pink-600 hover:bg-pink-50 hover:text-pink-600">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-5 text-xs font-extrabold uppercase tracking-[.18em] text-gray-900">Navegación</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="text-gray-500 transition hover:translate-x-1 hover:text-sanmarcos-red">Inicio</a></li>
+                        <li><a href="noticias.html" class="text-gray-500 transition hover:translate-x-1 hover:text-sanmarcos-red">Noticias</a></li>
+                        <li><a href="proyectos.html" class="font-bold text-sanmarcos-red">Proyectos</a></li>
+                        <li><a href="docentes.html" class="text-gray-500 transition hover:translate-x-1 hover:text-sanmarcos-red">Directorio docente</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="mb-5 text-xs font-extrabold uppercase tracking-[.18em] text-gray-900">Contacto</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="mt-0.5 h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span class="text-gray-500">Filial Chilca, Lima, Perú.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span id="txtTelefono" class="break-all font-medium text-gray-500">Cargando...</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span id="txtCorreo" class="break-all font-medium text-gray-500">Cargando...</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-7 text-center sm:flex-row sm:text-left">
+                <p class="text-xs font-medium text-gray-400">© 2026 UNMSM Filial Chilca. Todos los derechos reservados.</p>
+                <p class="inline-flex items-center rounded-full border border-gray-100 bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-500">
+                    Hecho con <i data-lucide="heart" class="mx-1.5 h-4 w-4 fill-current text-sanmarcos-red"></i> por un SanMarquino :)
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil independiente de portal.js
+        (() => {
+            const button = document.getElementById('menuToggle');
+            const menu = document.getElementById('mobileMenu');
+            if (!button || !menu) return;
+
+            const closeMenu = () => {
+                menu.classList.add('hidden');
+                button.setAttribute('aria-expanded', 'false');
+                button.setAttribute('aria-label', 'Abrir menú');
+                button.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+                if (window.lucide) lucide.createIcons();
+            };
+
+            button.addEventListener('click', () => {
+                const isOpen = !menu.classList.contains('hidden');
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    menu.classList.remove('hidden');
+                    button.setAttribute('aria-expanded', 'true');
+                    button.setAttribute('aria-label', 'Cerrar menú');
+                    button.innerHTML = '<i data-lucide="x" class="h-5 w-5"></i>';
+                    if (window.lucide) lucide.createIcons();
+                }
+            });
+
+            menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) closeMenu();
+            });
+        })();
+
+        if (window.lucide) lucide.createIcons();
+    </script>
+
+    <script type="module" src="portal.js"></script>
+</body>
+</html>

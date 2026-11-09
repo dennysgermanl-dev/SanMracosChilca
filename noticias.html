@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#730000">
+    <title>Noticias y Actualidad | UNMSM Filial Chilca</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        sanmarcos: {
+                            red: '#730000',
+                            dark: '#4A0000',
+                            gold: '#D4AF37',
+                            light: '#F8F1E8'
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 18px 55px rgba(25, 25, 25, .08)',
+                        card: '0 22px 60px rgba(74, 0, 0, .10)'
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        body { overflow-x: hidden; }
+        .glass {
+            background: rgba(255,255,255,.88);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(15,23,42,.07);
+        }
+        .hero-pattern {
+            background-image:
+                radial-gradient(rgba(115,0,0,.08) 1px, transparent 1px);
+            background-size: 19px 19px;
+            mask-image: linear-gradient(to right, black, transparent 85%);
+        }
+        .hero-glow { filter: blur(75px); pointer-events: none; }
+        #noticiasGrid { min-height: 280px; }
+        #noticiasGrid > * { min-width: 0; }
+        #noticiasGrid img { max-width: 100%; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F7F7F8] text-gray-800 antialiased selection:bg-sanmarcos-red selection:text-white">
+
+    <!-- Navegación institucional -->
+    <nav class="glass fixed inset-x-0 top-0 z-50 shadow-sm transition-all duration-300" id="navbar">
+        <div class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <a href="index.html" class="group flex items-center gap-3" aria-label="UNMSM Filial Chilca, ir al inicio">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold text-white shadow-lg shadow-red-950/20 transition duration-300 group-hover:-rotate-3 group-hover:scale-105">SM</div>
+                <div>
+                    <p class="text-base font-extrabold leading-none tracking-tight text-gray-900 sm:text-lg">UNMSM</p>
+                    <p class="mt-1 text-[9px] font-bold uppercase tracking-[.24em] text-sanmarcos-red sm:text-[10px]">Filial Chilca</p>
+                </div>
+            </a>
+
+            <div class="hidden items-center gap-8 md:flex">
+                <a href="index.html" class="text-sm font-semibold text-gray-600 transition hover:text-sanmarcos-red">Inicio</a>
+                <a href="noticias.html" aria-current="page" class="relative py-2 text-sm font-extrabold text-sanmarcos-red">
+                    Noticias
+                    <span class="absolute -bottom-[19px] left-0 h-[2px] w-full rounded-full bg-sanmarcos-red"></span>
+                </a>
+                <a href="proyectos.html" class="text-sm font-semibold text-gray-600 transition hover:text-sanmarcos-red">Proyectos</a>
+                <a href="docentes.html" class="text-sm font-semibold text-gray-600 transition hover:text-sanmarcos-red">Directorio</a>
+                <a href="index.html#contacto" class="rounded-full border border-gray-200 px-5 py-2.5 text-xs font-bold text-gray-700 transition hover:border-sanmarcos-red/30 hover:bg-red-50 hover:text-sanmarcos-red">Contáctanos</a>
+            </div>
+
+            <button id="menuToggle" type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-800 transition hover:border-sanmarcos-red/30 hover:bg-red-50 md:hidden" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden border-t border-gray-100 bg-white/95 px-4 py-4 shadow-xl backdrop-blur-xl md:hidden">
+            <div class="mx-auto flex max-w-7xl flex-col gap-1">
+                <a href="index.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Inicio</a>
+                <a href="noticias.html" aria-current="page" class="rounded-xl bg-red-50 px-4 py-3 text-sm font-extrabold text-sanmarcos-red">Noticias</a>
+                <a href="proyectos.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Proyectos</a>
+                <a href="docentes.html" class="rounded-xl px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-red-50 hover:text-sanmarcos-red">Directorio</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Cabecera de noticias -->
+        <section class="relative isolate overflow-hidden border-b border-gray-200 bg-white pb-16 pt-36 sm:pb-20 sm:pt-40 lg:pb-24">
+            <div class="hero-pattern absolute inset-y-0 left-0 w-3/4 opacity-80"></div>
+            <div class="hero-glow absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-sanmarcos-gold/20 sm:h-[28rem] sm:w-[28rem]"></div>
+            <div class="hero-glow absolute -bottom-40 left-1/3 -z-10 h-72 w-72 rounded-full bg-sanmarcos-red/10"></div>
+            <div class="absolute right-0 top-0 -z-10 h-full w-1/3 skew-x-[-15deg] bg-gradient-to-l from-sanmarcos-light/80 to-transparent"></div>
+
+            <div class="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 md:flex-row md:items-end md:justify-between lg:px-8">
+                <div class="max-w-3xl">
+                    <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-sanmarcos-red/10 bg-red-50 px-4 py-2">
+                        <span class="h-2 w-2 rounded-full bg-sanmarcos-red"></span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-[.22em] text-sanmarcos-red sm:text-xs">Sala de prensa · Actualidad</span>
+                    </div>
+                    <p class="mb-3 text-xs font-bold uppercase tracking-[.28em] text-gray-400 sm:text-sm">UNMSM · Filial Chilca</p>
+                    <h1 class="text-4xl font-extrabold leading-[1.12] tracking-tight text-gray-950 sm:text-5xl md:text-6xl">
+                        La vida universitaria
+                        <span class="block text-sanmarcos-red">en movimiento.</span>
+                    </h1>
+                    <p class="mt-6 max-w-2xl text-sm leading-7 text-gray-500 sm:text-base sm:leading-8">
+                        Comunicados, actividades y novedades de nuestra comunidad universitaria. Mantente informado sobre lo que sucede en la Filial Chilca.
+                    </p>
+                </div>
+
+                <div class="hidden shrink-0 md:block">
+                    <div class="relative flex h-36 w-36 items-center justify-center rounded-[2rem] border border-gray-100 bg-white shadow-soft lg:h-44 lg:w-44">
+                        <div class="absolute inset-3 rounded-[1.5rem] border border-dashed border-sanmarcos-red/15"></div>
+                        <i data-lucide="newspaper" class="h-16 w-16 text-sanmarcos-red/80 lg:h-20 lg:w-20"></i>
+                        <span class="absolute -bottom-3 -right-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-sanmarcos-gold text-gray-950 shadow-lg">
+                            <i data-lucide="megaphone" class="h-5 w-5"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listado dinámico: portal.js utiliza noticiasGrid -->
+        <section id="actualidad" class="min-h-[50vh] py-14 sm:py-20">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mb-9 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="mb-2 text-[10px] font-extrabold uppercase tracking-[.24em] text-sanmarcos-red sm:text-xs">Información institucional</p>
+                        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Últimas noticias</h2>
+                        <p class="mt-2 max-w-xl text-sm leading-6 text-gray-500">Descubre anuncios y acontecimientos de nuestra comunidad académica.</p>
+                    </div>
+                    <div class="inline-flex items-center gap-2 self-start rounded-full border border-gray-200 bg-white px-4 py-2.5 shadow-sm sm:self-auto">
+                        <i data-lucide="calendar-days" class="h-4 w-4 text-sanmarcos-red"></i>
+                        <span class="text-xs font-bold text-gray-600">Actualidad universitaria</span>
+                    </div>
+                </div>
+
+                <div id="noticiasGrid" class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
+                    <!-- Skeletons de carga -->
+                    <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm animate-pulse">
+                        <div class="h-56 bg-gray-200 sm:h-60"></div>
+                        <div class="space-y-4 p-6 sm:p-7">
+                            <div class="h-3 w-28 rounded bg-gray-200"></div>
+                            <div class="h-6 w-full rounded bg-gray-200"></div>
+                            <div class="h-6 w-2/3 rounded bg-gray-200"></div>
+                            <div class="h-3 w-full rounded bg-gray-100"></div>
+                            <div class="h-3 w-5/6 rounded bg-gray-100"></div>
+                            <div class="h-10 w-32 rounded-full bg-gray-200"></div>
+                        </div>
+                    </div>
+                    <div class="hidden overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm animate-pulse sm:block">
+                        <div class="h-56 bg-gray-200 sm:h-60"></div>
+                        <div class="space-y-4 p-6 sm:p-7">
+                            <div class="h-3 w-28 rounded bg-gray-200"></div>
+                            <div class="h-6 w-full rounded bg-gray-200"></div>
+                            <div class="h-6 w-2/3 rounded bg-gray-200"></div>
+                            <div class="h-3 w-full rounded bg-gray-100"></div>
+                            <div class="h-3 w-5/6 rounded bg-gray-100"></div>
+                            <div class="h-10 w-32 rounded-full bg-gray-200"></div>
+                        </div>
+                    </div>
+                    <div class="hidden overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm animate-pulse xl:block">
+                        <div class="h-56 bg-gray-200 sm:h-60"></div>
+                        <div class="space-y-4 p-6 sm:p-7">
+                            <div class="h-3 w-28 rounded bg-gray-200"></div>
+                            <div class="h-6 w-full rounded bg-gray-200"></div>
+                            <div class="h-6 w-2/3 rounded bg-gray-200"></div>
+                            <div class="h-3 w-full rounded bg-gray-100"></div>
+                            <div class="h-3 w-5/6 rounded bg-gray-100"></div>
+                            <div class="h-10 w-32 rounded-full bg-gray-200"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex flex-col items-center gap-3 text-center">
+                    <div class="h-px w-16 bg-gradient-to-r from-transparent via-sanmarcos-red/40 to-transparent"></div>
+                    <p class="text-xs font-medium text-gray-400">UNMSM Filial Chilca · Información para nuestra comunidad</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer institucional -->
+    <footer class="border-t border-gray-200 bg-white pb-8 pt-16 sm:pt-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+                <div class="sm:col-span-2">
+                    <a href="index.html" class="mb-5 inline-flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-sanmarcos-red to-sanmarcos-dark text-lg font-extrabold text-white shadow-lg">SM</div>
+                        <div>
+                            <h2 class="text-lg font-extrabold leading-none text-gray-900">UNMSM Chilca</h2>
+                            <p class="mt-1 text-[9px] font-bold uppercase tracking-[.2em] text-sanmarcos-red">Decana de América</p>
+                        </div>
+                    </a>
+                    <p class="mb-6 max-w-sm text-sm leading-7 text-gray-500">
+                        Universidad Nacional Mayor de San Marcos, Decana de América. Formando el futuro del Perú desde la sede sur.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" id="linkFb" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-gray-600 transition hover:border-blue-600 hover:bg-blue-50 hover:text-blue-600">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" id="linkIg" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-gray-600 transition hover:border-pink-600 hover:bg-pink-50 hover:text-pink-600">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-5 text-xs font-extrabold uppercase tracking-[.18em] text-gray-900">Navegación</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html" class="text-gray-500 transition hover:text-sanmarcos-red">Inicio</a></li>
+                        <li><a href="noticias.html" class="font-bold text-sanmarcos-red">Noticias</a></li>
+                        <li><a href="proyectos.html" class="text-gray-500 transition hover:text-sanmarcos-red">Proyectos</a></li>
+                        <li><a href="docentes.html" class="text-gray-500 transition hover:text-sanmarcos-red">Directorio docente</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="mb-5 text-xs font-extrabold uppercase tracking-[.18em] text-gray-900">Contacto</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="mt-0.5 h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span class="text-gray-500">Filial Chilca, Lima, Perú.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span id="txtTelefono" class="break-all font-medium text-gray-500">Cargando...</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="h-5 w-5 shrink-0 text-sanmarcos-red"></i>
+                            <span id="txtCorreo" class="break-all font-medium text-gray-500">Cargando...</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-7 text-center sm:flex-row sm:text-left">
+                <p class="text-xs font-medium text-gray-400">© 2026 UNMSM Filial Chilca. Todos los derechos reservados.</p>
+                <p class="inline-flex items-center rounded-full border border-gray-100 bg-gray-50 px-4 py-2 text-xs font-semibold text-gray-500">
+                    Hecho con <i data-lucide="heart" class="mx-1.5 h-4 w-4 fill-current text-sanmarcos-red"></i> por un SanMarquino :)
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil: independiente de la lógica de portal.js
+        (() => {
+            const button = document.getElementById('menuToggle');
+            const menu = document.getElementById('mobileMenu');
+            if (!button || !menu) return;
+
+            const closeMenu = () => {
+                menu.classList.add('hidden');
+                button.setAttribute('aria-expanded', 'false');
+                button.setAttribute('aria-label', 'Abrir menú');
+                button.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+                if (window.lucide) lucide.createIcons();
+            };
+
+            button.addEventListener('click', () => {
+                const isOpen = !menu.classList.contains('hidden');
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    menu.classList.remove('hidden');
+                    button.setAttribute('aria-expanded', 'true');
+                    button.setAttribute('aria-label', 'Cerrar menú');
+                    button.innerHTML = '<i data-lucide="x" class="h-5 w-5"></i>';
+                    if (window.lucide) lucide.createIcons();
+                }
+            });
+
+            menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) closeMenu();
+            });
+        })();
+
+        if (window.lucide) lucide.createIcons();
+    </script>
+
+    <script type="module" src="portal.js"></script>
+</body>
+</html>
